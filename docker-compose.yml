@@ -36,6 +36,7 @@ rancher-traefik:
     traefik.entrypoints.http.address: :80
     traefik.entrypoints.https.address: :443
     traefik.certificates: "a1.localcluster.joanmarc.cat,a1.localcluster.imim.cloud,joanmarc2.cat"
+    io.rancher.scheduler.affinity:host_label: jmca.traefik=true
     #io.rancher.scheduler.global: 'true'
   tty: true
   image: jmcarbo/rancher-traefik:latest
@@ -45,10 +46,7 @@ rancher-traefik:
     MINIO_BUCKET: certificates
     MINIO_ACCESS_KEY: DG26A9NNR0K99SEIDVWH 
     MINIO_SECRET_KEY: ZWs71joah1c3ZR68TjmYatlWjeeb3Nn3th1RNCb1 
-    RANCHER_URL: http://192.168.99.100:8080/
-    RANCHER_ACCESS_KEY: FAC0083B0208E2E2B5F4
-    RANCHER_SECRET_KEY: xSjJFoSbUeDPFb9ELQ5okPD6EoQ3Gki9yAvziVbL
-    RANCHER_IP: 192.168.99.100
+    RANCHER_IP: ${RANCHER_IP}
   volumes:
     - acme:/acme
   #command: /bin/bash

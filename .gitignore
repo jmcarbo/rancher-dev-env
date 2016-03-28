@@ -2,3 +2,4 @@ acme
 acme/*
 ngrok.yml
 credentials.env
+credentials.env*
