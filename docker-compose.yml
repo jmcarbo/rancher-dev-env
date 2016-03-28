@@ -1,0 +1,54 @@
+whoami:
+  labels:
+    io.rancher.container.pull_image: always
+  image: jwilder/whoami
+  stdin_open: true
+rufus:
+  labels:
+    io.rancher.container.pull_image: always
+  image: rufus/isawesome
+  stdin_open: true
+owncloud:
+  image: owncloud:9.0
+drupal:
+  image: drupal
+gollum:
+  image: suttang/gollum
+minio:
+  image: minio/minio
+  environment:
+    MINIO_ACCESS_KEY: DG26A9NNR0K99SEIDVWH 
+    MINIO_SECRET_KEY: ZWs71joah1c3ZR68TjmYatlWjeeb3Nn3th1RNCb1 
+  volumes:
+    - exportminio:/export
+    - minioconf:/root/.minio
+syno7:
+  image: rancher/external-service
+
+rancher-traefik:
+  ports:
+  - 80:80/tcp
+  - 443:443/tcp
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "environment"
+    traefik.entrypoints.http.address: :80
+    traefik.entrypoints.https.address: :443
+    traefik.certificates: "a1.localcluster.joanmarc.cat,a1.localcluster.imim.cloud,joanmarc2.cat"
+    #io.rancher.scheduler.global: 'true'
+  tty: true
+  image: jmcarbo/rancher-traefik:latest
+  stdin_open: true
+  environment:
+    MINIO_URL: http://minio:9000
+    MINIO_BUCKET: certificates
+    MINIO_ACCESS_KEY: DG26A9NNR0K99SEIDVWH 
+    MINIO_SECRET_KEY: ZWs71joah1c3ZR68TjmYatlWjeeb3Nn3th1RNCb1 
+    RANCHER_URL: http://192.168.99.100:8080/
+    RANCHER_ACCESS_KEY: FAC0083B0208E2E2B5F4
+    RANCHER_SECRET_KEY: xSjJFoSbUeDPFb9ELQ5okPD6EoQ3Gki9yAvziVbL
+    RANCHER_IP: 192.168.99.100
+  volumes:
+    - acme:/acme
+  #command: /bin/bash

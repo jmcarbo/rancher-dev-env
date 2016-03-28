@@ -1,0 +1,68 @@
+whoami:
+  scale: 1
+  metadata:
+    traefik.backend: whoami
+    traefik.frontend.rule: Host
+    traefik.frontend.value: "whoami.${RANCHER_IP}.xip.io,whoamijmca.ngrok.io"
+    traefik.port: '8000'
+    traefik.enable: 'true'
+syno7:
+  external_ips:
+  - 192.168.2.7
+  metadata:
+    traefik.backend: syno7
+    traefik.frontend.rule: Host
+    traefik.frontend.value: "syno7.ngrok.io"
+    traefik.port: '5000'
+    traefik.enable: 'true'
+rufus:
+  scale: 1
+  metadata:
+    traefik.backend: rufus
+    traefik.frontend.rule: Host
+    traefik.frontend.value: "rufus.${RANCHER_IP}.xip.io,rufusjmca.ngrok.io"
+    traefik.port: '80'
+    traefik.enable: 'true'
+owncloud:
+  scale: 1
+  metadata:
+    traefik.backend: owncloud
+    traefik.frontend.rule: Host
+    traefik.frontend.value: "owncloud.${RANCHER_IP}.xip.io,owncloudjmca.ngrok.io"
+    traefik.port: '80'
+    traefik.enable: 'true'
+drupal:
+  scale: 1
+  metadata:
+    traefik.backend: drupal
+    traefik.frontend.rule: Host
+    traefik.frontend.value: "drupal.${RANCHER_IP}.xip.io,drupaljmca.ngrok.io"
+    traefik.port: '80'
+    traefik.enable: 'true'
+gollum:
+  scale: 1
+  metadata:
+    traefik.backend: gollum
+    traefik.frontend.rule: Host
+    traefik.frontend.value: "a1.localcluster.imim.cloud,gollumjmca.ngrok.io"
+    traefik.port: '4567'
+    traefik.enable: 'true'
+    traefik.certificates: "marbiobanc.imim.cloud"
+minio:
+  scale: 1
+  metadata:
+    traefik.backend: minio
+    traefik.frontend.rule: Host
+    traefik.frontend.value: "minio.localcluster.joanmarc.cat,miniojmca.ngrok.io"
+    traefik.port: '9000'
+    traefik.enable: 'true'
+    traefik.certificates: "minio.imim.cloud,miniointern.imim.cloud"
+
+rancher-traefik:
+  scale: 1
+  metadata:
+    traefik.backend: traefik
+    traefik.frontend.rule: Host
+    traefik.frontend.value: "traefik.ngrok.io"
+    traefik.port: '8080'
+    traefik.enable: 'true'
